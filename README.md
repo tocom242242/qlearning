@@ -2,7 +2,7 @@
 1.Clone this repository
 
 ```
-https://github.com/tocom242242/qlearning_sample.git
+git clone https://github.com/tocom242242/qlearning_sample.git
 ```
 
 2.Run this qlearning sample, 
