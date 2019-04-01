@@ -30,5 +30,5 @@ if __name__ == '__main__':
     plt.plot(np.arange(nb_episode), rewards)
     plt.xlabel("episode")
     plt.ylabel("accumulated reward")
-    plt.show()
     plt.savefig("result.jpg")
+    plt.show()
