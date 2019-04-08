@@ -20,7 +20,6 @@ class QLearningAgent():
         self.previous_state = str(observation)
         self.previous_action_id = None
         self.q_values = self._init_q_values()
-        self.is_share = False
 
     def _init_q_values(self):
         """
