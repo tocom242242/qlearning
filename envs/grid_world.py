@@ -37,7 +37,7 @@ class GridWorld():
         """
             return pos, reward
         """
-        to_y, to_x = self.agent_pos
+        to_y, to_x = copy.deepcopy(self.agent_pos)
         # 移動可能かどうかの確認。移動不可能であれば、ポジションはそのままにマイナス報酬@todo
         if self._is_possible_action(to_x, to_y, action) == False:
             return self.agent_pos, -1, False
