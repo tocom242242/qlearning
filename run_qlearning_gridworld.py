@@ -1,10 +1,9 @@
-import os,sys
 import random
 import numpy as np
 import matplotlib.pyplot as plt
-from agents.qlearning_agent import QLearningAgent
-from agents.policy import EpsGreedyQPolicy
-from envs.grid_world import GridWorld
+from qlearning_agent import QLearningAgent
+from policy import EpsGreedyQPolicy
+from grid_world import GridWorld
 
 if __name__ == '__main__':
     grid_env = GridWorld() # grid worldの環境の初期化
