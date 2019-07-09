@@ -18,7 +18,7 @@ if __name__ == '__main__':
         while(is_goal == False):    # ゴールするまで続ける
             action = agent.act()    # 行動選択
             state, reward, is_goal = grid_env.step(action)
-            agent.observe_state_and_reward(state, reward)   # 状態と報酬の観測
+            agent.observe(state, reward)   # 状態と報酬の観測
             episode_reward.append(reward)
         rewards.append(np.sum(episode_reward)) # このエピソードの平均報酬を与える
         state = grid_env.reset()    #  初期化

@@ -1,21 +1,11 @@
 import copy
 import numpy as np
-import math
-import ipdb
-from abc import ABCMeta, abstractmethod
 
-class Policy(metaclass=ABCMeta):
-
-    @abstractmethod
-    def select_action(self, **kwargs):
-        pass
-
-class EpsGreedyQPolicy(Policy):
+class EpsGreedyQPolicy():
     """
         ε-greedy選択 
     """
     def __init__(self, epsilon=.1, decay_rate=1):
-        super(EpsGreedyQPolicy, self).__init__()
         self.epsilon = epsilon
         self.decay_rate = decay_rate
         self.name = "EPS"
