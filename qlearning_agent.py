@@ -11,7 +11,6 @@ class QLearningAgent():
         self.policy = policy
         self.reward_history = []
         self.actions = actions
-        self.gamma = gamma
         self.state = str(observation)
         self.ini_state = str(observation)
         self.previous_state = None

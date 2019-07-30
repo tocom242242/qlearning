@@ -2,8 +2,9 @@ import numpy as np
 import copy
 
 FILED_TIPE = {
-    "N":0, 
-    "G":1,
+    "N":0,  #通常
+    "G":1,  #ゴール
+    "W":2,  #壁
     }
 
 ACTIONS = {
@@ -20,16 +21,16 @@ class GridWorld():
     def __init__(self):
 
         self.map = [
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-                [0, 0, 0, 0, 0, 0, 0, 1, 0, 0], 
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 1], 
+                [0, 0, 0, 0, 2, 0], 
+                [0, 0, 0, 2, 0, 0], 
+                [0, 0, 0, 0, 2, 2], 
+                [0, 0, 0, 0, 0, 0], 
+                [0, 0, 0, 0, 0, 0], 
                 ]
 
-        self.start_pos = 3, 0 # エージェントのスタート地点(y, x)
+        self.start_pos =  5, 0 # エージェントのスタート地点(y, x)
         self.agent_pos = copy.deepcopy(self.start_pos)  # エージェントがいる地点
 
     def step(self, action):
@@ -64,6 +65,15 @@ class GridWorld():
         else:
             return False
 
+    def _is_wall(self, x, y):
+        """
+            x, yが壁かどうかの確認
+        """
+        if self.map[y][x] == FILED_TIPE["W"]:
+            return True
+        else:
+            return False
+
     def _is_possible_action(self, x, y, action):
         """ 
             実行可能な行動かどうかの判定
@@ -85,6 +95,8 @@ class GridWorld():
         if len(self.map) <= to_y or 0 > to_y:
             return False
         elif len(self.map[0]) <= to_x or 0 > to_x:
+            return False
+        elif self._is_wall(to_x, to_y):
             return False
 
         return True
