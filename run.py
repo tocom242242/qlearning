@@ -8,7 +8,7 @@ from grid_world import GridWorld
 if __name__ == '__main__':
     grid_env = GridWorld() # grid worldの環境の初期化
     ini_state = grid_env.start_pos  # 初期状態（エージェントのスタート地点の位置）
-    policy = EpsGreedyQPolicy(epsilon=0.01) # 方策の初期化。ここではε-greedy
+    policy = EpsGreedyQPolicy(epsilon=.01) # 方策の初期化。ここではε-greedy
     agent = QLearningAgent(actions=np.arange(4), observation=ini_state, policy=policy) # Q Learning エージェントの初期化
     nb_episode = 100   #エピソード数
     rewards = []    # 評価用報酬の保存
@@ -24,6 +24,15 @@ if __name__ == '__main__':
         state = grid_env.reset()    #  初期化
         agent.observe(state)    # エージェントを初期位置に
         is_goal = False
+
+    # テスト(greedyアクション)
+    agent.traning = False
+    while(is_goal == False):    # ゴールするまで続ける
+        print("(y, x):{}".format(state))
+        action = agent.act()    # 行動選択
+        print(action)
+        state, reward, is_goal = grid_env.step(action)
+        agent.observe(state, reward)   # 状態と報酬の観測
 
     # 結果のプロット
     plt.plot(np.arange(nb_episode), rewards)

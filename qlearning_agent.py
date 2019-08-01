@@ -2,10 +2,8 @@ import numpy as np
 import copy
 
 class QLearningAgent():
-    """
-       qlearning エージェント
-    """
-    def __init__(self, alpha=0.2, policy=None, gamma=0.99, actions=None, observation=None):
+
+    def __init__(self, alpha=.2, policy=None, gamma=.99, actions=None, observation=None):
         self.alpha = alpha
         self.gamma = gamma
         self.policy = policy
@@ -16,6 +14,7 @@ class QLearningAgent():
         self.previous_state = None
         self.previous_action_id = None
         self.q_values = self._init_q_values()
+        self.traning = True
 
     def _init_q_values(self):
         """
@@ -34,7 +33,10 @@ class QLearningAgent():
         return self.state
 
     def act(self, q_values=None):
-        action_id = self.policy.select_action(self.q_values[self.state])
+        if self.traning:
+            action_id = self.policy.select_action(self.q_values[self.state])
+        else:
+            action_id = self.policy.select_greedy_action(self.q_values[self.state])
         self.previous_action_id = action_id
         action = self.actions[action_id]
         return action
@@ -50,7 +52,7 @@ class QLearningAgent():
         self.previous_state = copy.deepcopy(self.state)
         self.state = next_state
 
-        if reward is not None:
+        if self.traning and reward is not None:
             self.reward_history.append(reward)
             self.learn(reward)
 

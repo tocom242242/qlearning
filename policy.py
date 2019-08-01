@@ -20,3 +20,10 @@ class EpsGreedyQPolicy():
             action = np.argmax(q_values)
 
         return action
+
+    def select_greedy_action(self, q_values):
+        assert q_values.ndim == 1
+        nb_actions = q_values.shape[0]
+        action = np.argmax(q_values)
+
+        return action

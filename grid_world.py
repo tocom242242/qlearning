@@ -15,30 +15,26 @@ ACTIONS = {
     }
 
 class GridWorld():
-    """
-        グリッドワールド
-    """
+
     def __init__(self):
 
-        self.map = [
-                [0, 0, 0, 0, 0, 0], 
-                [0, 0, 0, 0, 0, 1], 
-                [0, 0, 0, 0, 2, 0], 
-                [0, 0, 0, 2, 0, 0], 
-                [0, 0, 0, 0, 2, 2], 
-                [0, 0, 0, 0, 0, 0], 
-                [0, 0, 0, 0, 0, 0], 
-                ]
+        self.map = [[0, 2, 0, 1], 
+                    [0, 0, 0, 2], 
+                    [0, 0, 2, 0], 
+                    [0, 2, 0, 0], 
+                    [0, 0, 0, 0]]
 
-        self.start_pos =  5, 0 # エージェントのスタート地点(y, x)
+        self.start_pos =  4, 0 # エージェントのスタート地点(y, x)
         self.agent_pos = copy.deepcopy(self.start_pos)  # エージェントがいる地点
 
     def step(self, action):
         """
-            return pos, reward
+            行動の実行
+            状態, 報酬、ゴールしたかを返却
         """
         to_y, to_x = copy.deepcopy(self.agent_pos)
-        # 移動可能かどうかの確認。移動不可能であれば、ポジションはそのままにマイナス報酬@todo
+
+        # 移動可能かどうかの確認。移動不可能であれば、ポジションはそのままにマイナス報酬
         if self._is_possible_action(to_x, to_y, action) == False:
             return self.agent_pos, -1, False
 
@@ -103,7 +99,7 @@ class GridWorld():
 
     def _compute_reward(self, x, y):
         if self.map[y][x] == FILED_TIPE["N"]:
-            return -1
+            return 0
         elif self.map[y][x] == FILED_TIPE["G"]:
             return 100
 
