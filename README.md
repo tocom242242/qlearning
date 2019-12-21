@@ -10,6 +10,3 @@ git clone https://github.com/tocom242242/qlearning_sample.git
 ```
 python run.py
 ```
-
-## blog
-https://www.tcom242242.net/entry/2018/08/20/152712
